@@ -1,0 +1,93 @@
+.skills-table {
+    border-collapse: separate; /* Allow spacing between cells */
+    border-spacing: 20px; /* Space between rows and columns */
+    width: 100%; /* Make the table full width */
+}
+
+
+
+
+.skill-card {
+    display: flex;
+    flex-direction: column; /* Stack image and text vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: flex-end; /* Align text at the bottom */
+    min-height: 200px; /* Increased height for better visibility */
+    padding: 2rem; /* Increased padding for larger cards */
+
+
+    background: var(--card-bg);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    color: #00FF00;
+}
+
+
+.skill-card img {
+    max-width: 100%; /* Ensure images fit within the card */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.skill-card:hover {
+    transform: translateY(-10px) rotateX(10deg);
+    box-shadow: 
+        0 5px 15px rgba(100, 255, 218, 0.2),
+        0 0 30px rgba(100, 255, 218, 0.1);
+}
+
+.skill-card i {
+    font-size: 2.5em; /* Adjusted icon size */
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(100, 255, 218, 0.3));
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover i {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px rgba(100, 255, 218, 0.5));
+}
+
+.slide-section {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 2.0s, transform 2.0s;
+    padding: 50px;
+    margin: 20px auto;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0); /* Setting background to transparent */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slide-section.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    text-align: left; /* Align content to the left */
+    padding: 10px;
+}
+.gif-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.gif-button:hover img {
+    opacity: 0.8; /* Adjust the opacity on hover */
+}
