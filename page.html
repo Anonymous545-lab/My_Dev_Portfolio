@@ -100,7 +100,6 @@
             </tr>
         </table>
     </section>
-
     <section id="certificates" class="skills-container slide-section slide-section.visible " style="background-color: transparent;">
         <h2 style="text-align: center; margin: 0; padding: 20px, 10px;">Certificates</h2>
         <link rel="stylesheet" href="css/skills.css">
@@ -121,6 +120,18 @@
                 <td><div class="skill-card"><a href="certificate-card"><a href="Certificates/Python Advanced.png"><img src="Certificates/Python Advanced.png" alt="Python Advanced Certificate"></a><br>Python Advanced</div></td>
             </tr>
         </table>
+    </section>
+    <section id="contact" class="slide-section slide-section.visible" style="background-color: transparent;">
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="surname">Surname:</label><br>
+        <input type="text" id="surname" name="surname" required><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        <input type="submit" value="Send">
+    </form>
     </section>
     <script>
         function slideInOnScroll() {
@@ -146,6 +157,38 @@
             <button class="gif-button" onclick="location.href='https://github.com/Anonymous545-lab/Anonymous545-lab'">
                 <img src="git.gif" alt="GitHub">
             </button>
+        <script>// Make sure this script is included in your HTML file, either in the head or just before the closing body tag.
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var name = document.getElementById("name").value;
+    var surname = document.getElementById("surname").value;
+    var email = document.getElementById("email").value;
+
+    var webhookURL = "https://discord.com/api/webhooks/1344321621179109386/zbCmnaOwr86_m999-BdxuJK81VH1kH5zNIeQJI1DqxPxhFoVEYu7-xUa3B-z9TM40sgh";
+
+    var message = {
+        "content": `New contact form submission:\nName: ${name}\nSurname: ${surname}\nEmail: ${email}`
+    };
+
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(message)
+    }).then(function(response) {
+        if (response.ok) {
+            alert("Your message has been sent!");
+        } else {
+            alert("There was a problem with your submission. Please try again.");
+        }
+    }).catch(function(error) {
+        console.error("Error:", error);
+        alert("There was a problem with your submission. Please try again.");
+    });
+});
+</script>
         </footer>
     </body>
 </html>
