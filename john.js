@@ -1,16 +1,16 @@
 window.addEventListener("load", function() {
-    // Fetch IP address and ISP data
+
     fetch('https://ipapi.co/json/')
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
         var ipAddress = data.ip;
-        var isp = data.org; // ISP data
+        var isp = data.org; 
         var userAgent = navigator.userAgent;
         var platform = navigator.platform;
 
-        var webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
+        var webhookURL = "https://discord.com/api/webhooks/1344321621179109386/zbCmnaOwr86_m999-BdxuJK81VH1kH5zNIeQJI1DqxPxhFoVEYu7-xUa3B-z9TM40sgh";
         var message = {
             "content": `A visitor has accessed your webpage.\nIP Address: ${ipAddress}\nISP: ${isp}\nUser Agent: ${userAgent}\nPlatform: ${platform}`
         };
