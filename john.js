@@ -1,17 +1,18 @@
 window.addEventListener("load", function() {
-    fetch('https://api.ipify.org?format=json')
+    // Fetch IP address and ISP data
+    fetch('https://ipapi.co/json/')
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
         var ipAddress = data.ip;
-
+        var isp = data.org; // ISP data
         var userAgent = navigator.userAgent;
         var platform = navigator.platform;
 
-        var webhookURL = "https://discord.com/api/webhooks/1344321621179109386/zbCmnaOwr86_m999-BdxuJK81VH1kH5zNIeQJI1DqxPxhFoVEYu7-xUa3B-z9TM40sgh";
+        var webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
         var message = {
-            "content": `A visitor has accessed your webpage.\nIP Address: ${ipAddress}\nUser Agent: ${userAgent}\nPlatform: ${platform}`
+            "content": `A visitor has accessed your webpage.\nIP Address: ${ipAddress}\nISP: ${isp}\nUser Agent: ${userAgent}\nPlatform: ${platform}`
         };
 
         fetch(webhookURL, {
@@ -31,6 +32,6 @@ window.addEventListener("load", function() {
         });
     })
     .catch(function(error) {
-        console.error("Error fetching IP address:", error);
+        console.error("Error fetching IP address and ISP data:", error);
     });
 });
